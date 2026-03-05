@@ -69,9 +69,16 @@ szjSzam2 x
 
 --   > szOsszeg1 123 0
 --   ```
+
+szjOsszeg3 :: (Num a, Integral (a -> a)) => (a -> a) -> a -> a
+szjOsszeg3 n
+    |n<0 = szjOsszeg3 (abs n)
+    |n<10 = n
+    |otherwise = mod n 10 + szjOsszeg3 (div n 10)
 main = do
     print(szjSzorzat 1234)
     print(szjOsszeg 1234)
     print(szjOsszeg2 1234)
     print(szjSzam 1234)
     print(szjSzam2 1234)
+    
