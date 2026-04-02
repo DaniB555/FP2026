@@ -6,10 +6,26 @@ import Data.Char
 -- II. Írjunk Haskell-függvényt, amely a foldl vagy a foldr függvényt alkalmazva
 
 -- - implementálja a length, sum, elem, reverse, product, maximum, insert-sort, ++, map, filter függvényeket,
+length' ls = foldl (\res x ->res+1) 0 ls
+sum' ls = foldl (+) 0 ls
+
+reverse' ls = foldl (\res x -> x : res) [] ls
+
 -- - meghatározza egy lista pozitív elemeinek összegét,
+
 -- - egy lista páros elemeinek szorzatát,
+product' ls = foldl (*)1 ls
+maximum' ls = foldl1(\x1 x2 -> if x1>x2 then x1 else x2) ls
+
+lsFuz lss = foldl1(++) lss
+map' fg ls = foldl(\res x-> res++ [fg x]) [] ls
+
+pozitivOsszead :: (Foldable t, Ord b, Num b) => t b -> b
+pozitivOsszead ls = foldl(\res x1 -> if x1>=0 then res+x1 else res) 0 ls
+
 -- - n-ig a négyzetszámokat.
 -- - meghatározza a $$P(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n$$ polinom adott $x_0$ értékre való behelyettesítési értékét: $$a_0 + x_0(a_1 + x_0(a_2 + x_0(a_3 + \ldots + x_0(a_{n-1}+ x_0 \cdot a_n))))$$
+atlag ls = sum ls /fromIntegral (length ls)
 
 -- III.
 lsTo = "ez egy PrOBA szoveg. ez egy masik proBa! Tobbfele irasJEL"
